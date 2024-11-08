@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+:root {
+   height: 100%;
+}
+
 :root {
    --foreground-rgb: 0, 0, 0;
    --background-start-rgb: 214, 219, 220;
@@ -50,6 +56,7 @@
       --chart-5: 27 87% 67%;
       --radius: 0.5rem;
    }
+
    .dark {
       --background: 222.2 84% 4.9%;
       --foreground: 210 40% 98%;
@@ -82,6 +89,7 @@
    * {
       @apply border-border;
    }
+
    body {
       @apply bg-background text-foreground;
    }

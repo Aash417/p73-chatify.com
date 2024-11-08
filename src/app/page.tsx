@@ -1,9 +1,5 @@
-import { Button } from '@/components/ui/button';
+import AuthScreen from '@/features/auth/components/auth-screen';
 
 export default function Home() {
-   return (
-      <div className="font-mono text-rose-500">
-         <Button variant="destructive">next</Button>
-      </div>
-   );
+   return <AuthScreen />;
 }
