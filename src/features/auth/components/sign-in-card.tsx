@@ -9,6 +9,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { SignInFlow } from '@/features/auth/types';
+import { useAuthActions } from '@convex-dev/auth/react';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -17,8 +18,15 @@ type Props = {
 };
 
 export default function SignInCard({ setState }: Props) {
+   const { signIn } = useAuthActions();
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
+   const [pending, setPending] = useState(false);
+
+   function onProviderSignIn() {
+      setPending(true);
+      signIn('google').finally(() => setPending(false));
+   }
 
    return (
       <Card className="h-full w-full p-8">
@@ -33,7 +41,7 @@ export default function SignInCard({ setState }: Props) {
             <form className="space-y-2.5">
                <Input
                   className=""
-                  disabled={false}
+                  disabled={pending}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="email"
@@ -42,7 +50,7 @@ export default function SignInCard({ setState }: Props) {
                />
                <Input
                   className=""
-                  disabled={false}
+                  disabled={pending}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="passoword"
@@ -53,7 +61,7 @@ export default function SignInCard({ setState }: Props) {
                   type="submit"
                   className="w-full"
                   size="lg"
-                  disabled={false}
+                  disabled={pending}
                >
                   Continue
                </Button>
@@ -63,8 +71,8 @@ export default function SignInCard({ setState }: Props) {
                <Button
                   variant="outline"
                   size="lg"
-                  onClick={() => {}}
-                  disabled={false}
+                  onClick={onProviderSignIn}
+                  disabled={pending}
                   className="relative w-full"
                >
                   <FcGoogle className="absolute left-2.5 top-3 size-5" />
