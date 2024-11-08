@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { SignInFlow } from '@/features/auth/types';
 import { useAuthActions } from '@convex-dev/auth/react';
+import { TriangleAlert } from 'lucide-react';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -22,10 +23,25 @@ export default function SignInCard({ setState }: Props) {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [pending, setPending] = useState(false);
+   const [error, setError] = useState('');
 
    function onProviderSignIn() {
       setPending(true);
-      signIn('google').finally(() => setPending(false));
+      signIn('google').finally(() => {
+         setPending(false);
+      });
+   }
+
+   function onPasswordSignIn(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      setPending(true);
+      signIn('password', { email, password, flow: 'signIn' })
+         .catch(() => {
+            setError('Invalid email or password');
+         })
+         .finally(() => {
+            setPending(false);
+         });
    }
 
    return (
@@ -37,8 +53,15 @@ export default function SignInCard({ setState }: Props) {
             </CardDescription>
          </CardHeader>
 
+         {!!error && (
+            <div className="mb-6 flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+               <TriangleAlert className="size-4" />
+               <p>{error}</p>
+            </div>
+         )}
+
          <CardContent className="space-y-5 px-0 pb-0">
-            <form className="space-y-2.5">
+            <form onSubmit={onPasswordSignIn} className="space-y-2.5">
                <Input
                   className=""
                   disabled={pending}
@@ -54,7 +77,7 @@ export default function SignInCard({ setState }: Props) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="passoword"
-                  type="passoword"
+                  type="password"
                   required
                />
                <Button
@@ -66,7 +89,9 @@ export default function SignInCard({ setState }: Props) {
                   Continue
                </Button>
             </form>
+
             <Separator />
+
             <div>
                <Button
                   variant="outline"
