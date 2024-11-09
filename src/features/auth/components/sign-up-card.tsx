@@ -20,6 +20,7 @@ type Props = {
 
 export default function SignUpCard({ setState }: Props) {
    const { signIn } = useAuthActions();
+   const [name, setName] = useState('');
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
@@ -42,7 +43,7 @@ export default function SignUpCard({ setState }: Props) {
       }
 
       setPending(true);
-      signIn('password', { email, password, flow: 'signUp' })
+      signIn('password', { name, email, password, flow: 'signUp' })
          .catch(() => {
             setError('Something went wrong');
          })
@@ -72,12 +73,21 @@ export default function SignUpCard({ setState }: Props) {
                <Input
                   className=""
                   disabled={pending}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Name"
+                  type="text"
+                  required
+               />
+               <Input
+                  className=""
+                  disabled={pending}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                   type="email"
                   required
-               />{' '}
+               />
                <Input
                   className=""
                   disabled={pending}
