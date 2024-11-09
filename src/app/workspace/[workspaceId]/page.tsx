@@ -1,7 +1,11 @@
-type Props = {
-   params: { workspaceId: string };
-};
+'use client';
 
-export default function Page({ params: { workspaceId } }: Props) {
-   return <div>workspace id : {workspaceId}</div>;
+import { useGetWorkspace } from '@/features/workspaces/api/use-get-workspace';
+import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
+
+export default function Page() {
+   const workspaceId = useWorkspaceId();
+   const { data } = useGetWorkspace({ id: workspaceId });
+
+   return <div>workspace id : {JSON.stringify(data)}</div>;
 }
