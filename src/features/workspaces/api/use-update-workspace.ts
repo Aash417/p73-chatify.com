@@ -10,10 +10,10 @@ type Options = {
    throwError?: boolean;
 };
 
-type RequestType = { name: string };
+type RequestType = { name: string; id: Id<'workspaces'> };
 type ResponseType = Id<'workspaces'> | null;
 
-export function useCreateWorkspace() {
+export function useUpdateWorkspace() {
    const [data, setData] = useState<ResponseType>(null);
    const [error, setError] = useState<Error | null>(null);
    const [status, setStatus] = useState<
@@ -25,7 +25,7 @@ export function useCreateWorkspace() {
    const isSuccess = useMemo(() => status === 'success', [status]);
    const isSettled = useMemo(() => status === 'settled', [status]);
 
-   const mutation = useMutation(api.workspaces.create);
+   const mutation = useMutation(api.workspaces.update);
 
    const mutate = useCallback(
       async (values: RequestType, options?: Options) => {
