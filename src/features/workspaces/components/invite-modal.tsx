@@ -29,7 +29,7 @@ export default function InviteModal({ open, setOpen, name, joinCode }: Props) {
    );
 
    function handleCopy() {
-      const inviteLink = `${window.location.origin} /join/${workspaceId} `;
+      const inviteLink = `${window.location.origin}/join/${workspaceId}`;
 
       navigator.clipboard
          .writeText(inviteLink)
