@@ -20,22 +20,22 @@ export default function UserButton() {
 
    if (!data) return null;
 
-   const { name } = data;
+   const { name, image } = data;
    const avatarFallback = name!.charAt(0).toUpperCase();
 
    return (
       <DropdownMenu>
          <DropdownMenuTrigger className="relative outline-none">
-            <Avatar className="size-10 transition hover:opacity-75">
-               <AvatarImage />
-               <AvatarFallback className="bg-sky-500 text-white">
+            <Avatar className="size-10 rounded-md transition hover:opacity-75">
+               <AvatarImage className="rounded-md" alt={name} src={image} />
+               <AvatarFallback className="rounded-md bg-sky-500 text-xs text-white">
                   {avatarFallback}
                </AvatarFallback>
             </Avatar>
          </DropdownMenuTrigger>
 
          <DropdownMenuContent align="center" side="right" className="w-60">
-            <DropdownMenuItem onClick={signOut}>
+            <DropdownMenuItem onClick={signOut} className="cursor-pointer">
                <LogOut className="mr-2 size-4" />
                Log out
             </DropdownMenuItem>
