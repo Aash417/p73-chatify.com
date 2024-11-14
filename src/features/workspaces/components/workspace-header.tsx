@@ -62,7 +62,7 @@ export default function WorkspaceHeader({ workspace, isAdmin }: Props) {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                            className="cursor-pointer py-2"
-                           onClick={() => { }}
+                           onClick={() => {}}
                         >
                            Invite people to {workspace.name}
                         </DropdownMenuItem>
