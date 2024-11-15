@@ -1,4 +1,5 @@
 import { useGetChannels } from '@/features/channels/api/use-get-channels';
+import { useChannelId } from '@/features/channels/hooks/use-channelId';
 import { useCreateChannelModal } from '@/features/channels/store/use-create-channel-modal';
 import { useCurrentMember } from '@/features/members/api/use-current-member';
 import { useGetMembers } from '@/features/members/api/use-get-members';
@@ -18,6 +19,7 @@ import WorkspaceSection from './workspace-section';
 
 export default function WorkspaceSidebar() {
    const workspaceId = useWorkspaceId();
+   const channelId = useChannelId();
    const [_open, setOpen] = useCreateChannelModal();
 
    const { data: member, isLoading: memberLoading } = useCurrentMember({
@@ -32,13 +34,16 @@ export default function WorkspaceSidebar() {
    const { data: members, isLoading: membersLoading } = useGetMembers({
       workspaceId,
    });
+   const isLoading =
+      memberLoading || workspaceLoading || channelsLoading || membersLoading;
 
-   if (memberLoading || workspaceLoading)
+   if (isLoading)
       return (
          <div className="flex h-full flex-col items-center justify-center bg-[#5E2C5F]">
             <Loader className="size-5 animate-spin text-white" />
          </div>
       );
+
    if (!member || !workspace)
       return (
          <div className="flex h-full flex-col items-center justify-center bg-[#5E2C5F]">
@@ -78,6 +83,7 @@ export default function WorkspaceSidebar() {
                   icon={HashIcon}
                   label={item.name}
                   id={item._id}
+                  variant={channelId === item._id ? 'active' : 'default'}
                />
             ))}
          </WorkspaceSection>
@@ -85,17 +91,15 @@ export default function WorkspaceSidebar() {
          <WorkspaceSection
             label="Direct Messages"
             hint="New direct messages"
-            onNew={() => {}}
+            onNew={() => { }}
          >
             {members?.map((item) => (
-               <div>
-                  <UserItem
-                     key={item._id}
-                     id={item._id}
-                     label={item.user.name}
-                     image={item.user.image}
-                  />
-               </div>
+               <UserItem
+                  key={item._id}
+                  id={item._id}
+                  label={item.user.name}
+                  image={item.user.image}
+               />
             ))}
          </WorkspaceSection>
       </div>

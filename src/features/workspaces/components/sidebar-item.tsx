@@ -38,7 +38,7 @@ export default function SidebarItem({ id, label, icon: Icon, variant }: Props) {
          size="sm"
          className={cn(sidebarItemVariants({ variant }))}
       >
-         <Link href={`/workspaces/${workspaceId}/channel/${id}`}>
+         <Link href={`/workspace/${workspaceId}/channel/${id}`}>
             <Icon className="mr-1 size-3.5 shrink-0" />
             <span className="truncate text-sm">{label}</span>
          </Link>
