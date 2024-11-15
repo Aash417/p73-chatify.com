@@ -14,6 +14,7 @@ import {
 } from 'react';
 import { MdSend } from 'react-icons/md';
 import { PiTextAa } from 'react-icons/pi';
+import EmojiPopover from './emoji-popover';
 import Hint from './hint';
 import { Button } from './ui/button';
 
@@ -131,6 +132,11 @@ export default function Editor({
       if (toolbarElement) toolbarElement.classList.toggle('hidden');
    }
 
+   function onEmojiSelect(emoji: any) {
+      const quill = quillRef.current;
+
+      quill?.insertText(quill.getSelection()?.index || 0, emoji.native);
+   }
    return (
       <div className="flex flex-col">
          <div className="flex flex-col overflow-hidden rounded-md border border-slate-200 bg-white transition focus-within:border-slate-300 focus-within:shadow-sm">
@@ -153,9 +159,8 @@ export default function Editor({
                   </Button>
                </Hint>
 
-               <Hint label="Emoji">
+               <EmojiPopover onEmojiSelect={onEmojiSelect}>
                   <Button
-                     onClick={() => { }}
                      disabled={disabled}
                      size="sm"
                      variant="ghost"
@@ -163,12 +168,12 @@ export default function Editor({
                   >
                      <Smile />
                   </Button>
-               </Hint>
+               </EmojiPopover>
 
                {variant === 'create' && (
                   <Hint label="Image">
                      <Button
-                        onClick={() => { }}
+                        onClick={() => {}}
                         disabled={false}
                         size="sm"
                         variant="ghost"
@@ -184,7 +189,7 @@ export default function Editor({
                      <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => { }}
+                        onClick={() => {}}
                         disabled={disabled}
                      >
                         Cancel
@@ -192,7 +197,7 @@ export default function Editor({
                      <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => { }}
+                        onClick={() => {}}
                         disabled={disabled || isEmpty}
                         className="hover:bg[#007a5a]/80 ml-auto bg-[#007a5a] text-white"
                      >
@@ -203,7 +208,7 @@ export default function Editor({
 
                {variant === 'create' && (
                   <Button
-                     onClick={() => { }}
+                     onClick={() => {}}
                      disabled={disabled || isEmpty}
                      size="iconSm"
                      className={cn(
@@ -219,11 +224,18 @@ export default function Editor({
             </div>
          </div>
 
-         <div className="flex justify-end pb-2 text-[10px] text-muted-foreground">
-            <p>
-               <strong>Shift + Enter</strong> to add a new line
-            </p>
-         </div>
+         {variant === 'create' && (
+            <div
+               className={cn(
+                  'flex justify-end pb-2 text-[10px] text-muted-foreground opacity-0',
+                  !isEmpty && 'opacity-100',
+               )}
+            >
+               <p>
+                  <strong>Shift + Enter</strong> to add a new line
+               </p>
+            </div>
+         )}
       </div>
    );
 }
