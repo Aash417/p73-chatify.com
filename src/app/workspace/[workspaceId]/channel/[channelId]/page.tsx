@@ -4,6 +4,7 @@ import Loader from '@/components/loader';
 import TriangleAlert from '@/components/triangle-alert';
 import { useGetChannel } from '@/features/channels/api/use-get-channel';
 import ChannelHeader from '@/features/channels/components/channel-header';
+import ChatInput from '@/features/channels/components/chat-input';
 import { useChannelId } from '@/features/channels/hooks/use-channelId';
 
 export default function Page() {
@@ -25,6 +26,10 @@ export default function Page() {
    return (
       <div className="flex h-full flex-col">
          <ChannelHeader title={channel.name} />
+
+         <div className="flex-1" />
+
+         <ChatInput placeholder={`Message # ${channel.name}`} />
       </div>
    );
 }
