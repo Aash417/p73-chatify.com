@@ -22,6 +22,11 @@ export default function WorkspaceHeader({ workspace, isAdmin }: Props) {
    const [preferencesOpen, setPreferencesOpen] = useState(false);
    const [inviteOpen, setInviteOpen] = useState(false);
 
+   //for sending serializable
+   function setPrefer(value: boolean) {
+      setPreferencesOpen(value);
+   }
+
    return (
       <>
          <InviteModal
@@ -32,7 +37,7 @@ export default function WorkspaceHeader({ workspace, isAdmin }: Props) {
          />
          <PreferencesModal
             open={preferencesOpen}
-            setOpen={setPreferencesOpen}
+            setOpen={setPrefer}
             initialValue={workspace.name}
          />
          <div className="flex h-[49px] items-center justify-between gap-0.5 px-4">

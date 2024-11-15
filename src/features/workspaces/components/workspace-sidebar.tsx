@@ -1,3 +1,4 @@
+import TriangleAlert from '@/components/triangle-alert';
 import { useGetChannels } from '@/features/channels/api/use-get-channels';
 import { useChannelId } from '@/features/channels/hooks/use-channelId';
 import { useCreateChannelModal } from '@/features/channels/store/use-create-channel-modal';
@@ -7,7 +8,6 @@ import { useGetWorkspace } from '@/features/workspaces/api/use-get-workspace';
 import WorkspaceHeader from '@/features/workspaces/components/workspace-header';
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
 import {
-   AlertTriangle,
    HashIcon,
    Loader,
    MessageSquareText,
@@ -45,12 +45,7 @@ export default function WorkspaceSidebar() {
       );
 
    if (!member || !workspace)
-      return (
-         <div className="flex h-full flex-col items-center justify-center bg-[#5E2C5F]">
-            <AlertTriangle className="size-5 text-white" />
-            <p className="text-sm text-white">Workspace not found</p>
-         </div>
-      );
+      return <TriangleAlert message="Workspace not found" color="text-white" />;
 
    return (
       <div className="flex h-full flex-col bg-[#5E2C5F]">
@@ -91,7 +86,7 @@ export default function WorkspaceSidebar() {
          <WorkspaceSection
             label="Direct Messages"
             hint="New direct messages"
-            onNew={() => { }}
+            onNew={() => {}}
          >
             {members?.map((item) => (
                <UserItem

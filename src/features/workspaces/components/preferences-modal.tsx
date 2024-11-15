@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import {
    Dialog,
@@ -14,7 +16,6 @@ import { useUpdateWorkspace } from '@/features/workspaces/api/use-update-workspa
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
 import useConfirm from '@/hooks/use-confirm';
 import { Trash } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -29,7 +30,6 @@ export default function PreferencesModal({
    setOpen,
    initialValue,
 }: Props) {
-   const router = useRouter();
    const workspaceId = useWorkspaceId();
    const [ConfirmDialog, confirm] = useConfirm(
       'Are you sure',
@@ -74,8 +74,8 @@ export default function PreferencesModal({
          },
          {
             onSuccess: () => {
-               window.location.replace('/');
                toast.success('Workspace removed');
+               window.location.replace('/');
             },
             onError: () => {
                toast.error('Failed to remove workspace');

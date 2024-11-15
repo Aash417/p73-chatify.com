@@ -69,7 +69,7 @@ export const getById = query({
    args: { id: v.id('workspaces') },
    handler: async (ctx, args) => {
       const userId = await getAuthUserId(ctx);
-      if (!userId) throw new Error('unauthorized');
+      if (!userId) throw new Error('unauthorized 1');
 
       const member = await ctx.db
          .query('members')
@@ -77,7 +77,7 @@ export const getById = query({
             q.eq('workspaceId', args.id).eq('userId', userId),
          )
          .unique();
-      if (!member) throw new Error('unauthorized');
+      if (!member) return null;
 
       return await ctx.db.get(args.id);
    },
