@@ -27,17 +27,18 @@ const schema = defineSchema({
       workspaceId: v.id('workspaces'),
       image: v.optional(v.id('_storage')),
       channelId: v.optional(v.id('channels')),
-      parentMessagesId: v.optional(v.id('messages')),
-      updatedAt: v.number(),
+      parentMessageId: v.optional(v.id('messages')),
+      updatedAt: v.optional(v.number()),
       conversationsId: v.optional(v.id('conversations')),
    })
       .index('by_workspace_id', ['workspaceId'])
       .index('by_member_id', ['memberId'])
       .index('by_channel_id', ['channelId'])
       .index('by_conversations_id', ['conversationsId'])
+      .index('by_parent_message_id', ['parentMessageId'])
       .index('by_channel_id_parent_message_id_conversation_id', [
          'channelId',
-         'parentMessagesId',
+         'parentMessageId',
          'conversationsId',
       ]),
    conversations: defineTable({
