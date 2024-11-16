@@ -16,6 +16,7 @@ type RequestType = {
    image?: Id<'_storage'>;
    channelId?: Id<'channels'>;
    parentMessagesId?: Id<'messages'>;
+   conversationId?: Id<'conversations'>;
 };
 type ResponseType = Id<'messages'> | null;
 
