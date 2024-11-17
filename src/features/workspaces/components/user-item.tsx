@@ -39,11 +39,9 @@ export default function UserItem({ id, label, image, variant }: Props) {
          asChild
       >
          <Link href={`/workspace/${workspaceId}/member/${id}`}>
-            <Avatar className="mr-1 size-5 rounded-md">
-               <AvatarImage className="rounded-md" src={image}></AvatarImage>
-               <AvatarFallback className="rounded-md bg-sky-500 text-white">
-                  {avatarFallback}
-               </AvatarFallback>
+            <Avatar className="mr-1 size-5">
+               <AvatarImage src={image}></AvatarImage>
+               <AvatarFallback>{avatarFallback}</AvatarFallback>
             </Avatar>
             <span className="truncate text-sm">{label}</span>
          </Link>
