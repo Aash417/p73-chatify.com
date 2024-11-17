@@ -1,5 +1,10 @@
+import { useCurrentMember } from '@/features/members/api/use-current-member';
 import { GetMessagesReturnType } from '@/features/messages/api/use-get-messages';
+import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
 import { differenceInMinutes, format, isToday, isYesterday } from 'date-fns';
+import { useState } from 'react';
+import { Id } from '../../convex/_generated/dataModel';
+import ChannelHero from './channel-hero';
 import Message from './message';
 
 const TIME_THRESHOLD = 5;
@@ -37,6 +42,10 @@ export default function MessageList({
    isLoadingMore,
    canLoadMore,
 }: Props) {
+   const workspaceId = useWorkspaceId();
+   const { data: currentMember } = useCurrentMember({ workspaceId });
+   const [editingId, setEditingId] = useState<Id<'messages'> | null>(null);
+
    const groupedMessage = data?.reduce(
       (groups, message) => {
          const date = new Date(message._creationTime);
@@ -80,6 +89,7 @@ export default function MessageList({
                         memberId={message.memberId}
                         authorImage={message.user.image}
                         authorName={message.user.name}
+                        isAuthor={message.member._id === currentMember?._id}
                         reactions={message.reactions}
                         body={message.body}
                         image={message.image}
@@ -88,16 +98,22 @@ export default function MessageList({
                         threadCount={message.threadCount}
                         threadImage={message.threadImage}
                         threadTimestamp={message.threadTimestamp}
-                        isAuthor={false}
-                        isEditing={false}
-                        setEdittingId={() => { }}
+                        isEditing={editingId === message._id}
+                        setEdittingId={setEditingId}
                         isCompact={isCompact}
-                        hideThreadButton={false}
+                        hideThreadButton={variant === 'thread'}
                      />
                   );
                })}
             </div>
          ))}
+
+         {variant === 'channel' && channelName && channelCreationTime && (
+            <ChannelHero
+               name={channelName}
+               creationTime={channelCreationTime}
+            />
+         )}
       </div>
    );
 }

@@ -13,7 +13,7 @@ type Props = { children: React.ReactNode };
 
 export default function Layout({ children }: Props) {
    return (
-      <div className="h-full bg-red-200">
+      <div className="h-full bg-red-100">
          <Toolbar />
          <div className="flex h-[calc(100vh-40px)]">
             <Sidebar />
