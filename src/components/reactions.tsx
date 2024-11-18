@@ -31,7 +31,7 @@ export default function Reactions({ data, onChange }: Props) {
                className={cn(
                   'boder flex h-6 items-center gap-x-1 rounded-full border-transparent bg-slate-200/70 px-2 text-slate-800',
                   reaction.memberIds.includes(currentMemberId) &&
-                  'border-blue-500 bg-blue-100/70 text-white',
+                     'border-blue-500 bg-blue-100/70 text-white',
                )}
             >
                {reaction.value}
@@ -40,7 +40,7 @@ export default function Reactions({ data, onChange }: Props) {
                      'text-xs font-semibold text-muted-foreground',
 
                      reaction.memberIds.includes(currentMemberId) &&
-                     'text-blue-500',
+                        'text-blue-500',
                   )}
                >
                   {reaction.count}

@@ -1,17 +1,25 @@
 'use client';
 
+import Loader from '@/components/loader';
 import Sidebar from '@/components/sidebar';
 import {
    ResizableHandle,
    ResizablePanel,
    ResizablePanelGroup,
 } from '@/components/ui/resizable';
+import Thread from '@/features/messages/components/thread';
 import Toolbar from '@/features/workspaces/components/toolbar';
 import WorkspaceSidebar from '@/features/workspaces/components/workspace-sidebar';
+import { usePanel } from '@/hooks/use-panel';
+import { Id } from '../../../../convex/_generated/dataModel';
 
 type Props = { children: React.ReactNode };
 
 export default function Layout({ children }: Props) {
+   const { parentMessageId, onOpenMessage, onClose } = usePanel();
+
+   const showPanel = !!parentMessageId;
+
    return (
       <div className="h-full">
          <Toolbar />
@@ -24,13 +32,29 @@ export default function Layout({ children }: Props) {
             >
                <ResizablePanel
                   defaultSize={20}
-                  minSize={11}
+                  minSize={20}
                   className="bg-[#5E2C5F]"
                >
                   <WorkspaceSidebar />
                </ResizablePanel>
                <ResizableHandle withHandle />
-               <ResizablePanel minSize={11}>{children}</ResizablePanel>
+               <ResizablePanel minSize={30}>{children}</ResizablePanel>
+
+               {showPanel && (
+                  <>
+                     <ResizableHandle withHandle />
+                     <ResizablePanel minSize={20} defaultSize={29}>
+                        {parentMessageId ? (
+                           <Thread
+                              messageId={parentMessageId as Id<'messages'>}
+                              onClose={onClose}
+                           />
+                        ) : (
+                           <Loader />
+                        )}
+                     </ResizablePanel>
+                  </>
+               )}
             </ResizablePanelGroup>
          </div>
       </div>

@@ -2,6 +2,7 @@ import { useRemoveMessage } from '@/features/messages/api/use-remove-message';
 import { useUpdateMessage } from '@/features/messages/api/use-update-message';
 import { useToggleReaction } from '@/features/reactions/api/use-toggle-reaction';
 import useConfirm from '@/hooks/use-confirm';
+import { usePanel } from '@/hooks/use-panel';
 import { cn } from '@/lib/utils';
 import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { format, isToday, isYesterday } from 'date-fns';
@@ -43,12 +44,13 @@ type Props = {
 };
 
 function formatFullTime(date: Date) {
-   return `${isToday(date)
+   return `${
+      isToday(date)
          ? 'Today'
          : isYesterday(date)
-            ? 'Yesterday'
-            : format(date, 'MMM d, yyy')
-      } at ${format(date, 'h:mm:ss')}`;
+           ? 'Yesterday'
+           : format(date, 'MMM d, yyy')
+   } at ${format(date, 'h:mm:ss')}`;
 }
 
 export default function Message({
@@ -71,6 +73,7 @@ export default function Message({
    threadTimestamp,
 }: Props) {
    const avatarFallback = authorName.charAt(0).toUpperCase();
+   const { parentMessageId, onOpenMessage, onClose } = usePanel();
    const [ConfirmDialog, confirm] = useConfirm(
       'Delete message',
       'Are you sure you want to delete this message',
@@ -108,6 +111,8 @@ export default function Message({
          { id },
          {
             onSuccess: () => {
+               if (parentMessageId === id) onClose();
+
                toast.success('Message deleted');
             },
             onError: () => {
@@ -137,7 +142,7 @@ export default function Message({
                   'group relative flex flex-col gap-2 p-1.5 hover:bg-gray-100/60',
                   isEditing && 'bg-[#f2c74433] hover:bg-[#f2c74433]',
                   isRemovingMessage &&
-                  'trasform origin-bottom scale-y-0 bg-rose-500/50 transition-all duration-200',
+                     'trasform origin-bottom scale-y-0 bg-rose-500/50 transition-all duration-200',
                )}
             >
                <div className="flex items-start gap-2">
@@ -177,7 +182,7 @@ export default function Message({
                      isPending={false}
                      handleEdit={() => setEdittingId(id)}
                      handleDelete={handleRemove}
-                     handleThread={() => { }}
+                     handleThread={() => onOpenMessage(id)}
                      handleReaction={handleReaction}
                      hideThreadButton={hideThreadButton}
                   />
@@ -195,7 +200,7 @@ export default function Message({
                'group relative flex flex-col gap-2 p-1.5 hover:bg-gray-100/60',
                isEditing && 'bg-[#f2c74433] hover:bg-[#f2c74433]',
                isRemovingMessage &&
-               'trasform origin-bottom scale-y-0 bg-rose-500/50 transition-all duration-200',
+                  'trasform origin-bottom scale-y-0 bg-rose-500/50 transition-all duration-200',
             )}
          >
             <div className="flex items-start gap-2">
@@ -220,7 +225,7 @@ export default function Message({
                   <div className="flex w-full flex-col overflow-hidden">
                      <div className="text-sm">
                         <button
-                           onClick={() => { }}
+                           onClick={() => {}}
                            className="font-bold text-primary hover:underline"
                         >
                            {authorName}
@@ -251,7 +256,7 @@ export default function Message({
                   isPending={false}
                   handleEdit={() => setEdittingId(id)}
                   handleDelete={handleRemove}
-                  handleThread={() => { }}
+                  handleThread={() => onOpenMessage(id)}
                   handleReaction={handleReaction}
                   hideThreadButton={hideThreadButton}
                />
