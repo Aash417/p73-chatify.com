@@ -5,6 +5,7 @@ import { differenceInMinutes, format, isToday, isYesterday } from 'date-fns';
 import { useState } from 'react';
 import { Id } from '../../convex/_generated/dataModel';
 import ChannelHero from './channel-hero';
+import Loader from './loader';
 import Message from './message';
 
 const TIME_THRESHOLD = 5;
@@ -16,7 +17,7 @@ type Props = {
    channelCreationTime?: number;
    variant?: 'channel' | 'thread' | 'conversation';
    data?: GetMessagesReturnType | undefined;
-   loadMore?: () => void;
+   loadMore: () => void;
    isLoadingMore?: boolean;
    canLoadMore?: boolean;
 };
@@ -107,6 +108,32 @@ export default function MessageList({
                })}
             </div>
          ))}
+
+         <div
+            className="h-1"
+            ref={(el) => {
+               if (el) {
+                  const observer = new IntersectionObserver(
+                     ([entry]) => {
+                        if (entry.isIntersecting && canLoadMore) {
+                           loadMore();
+                        }
+                     },
+                     { threshold: 1.0 },
+                  );
+
+                  observer.observe(el);
+                  return () => observer.disconnect();
+               }
+            }}
+         />
+
+         {isLoadingMore && (
+            <div className="relative my-2 text-center">
+               <hr className="absolute left-0 top-1/2 border-t border-gray-300 ring-0" />
+               <Loader />
+            </div>
+         )}
 
          {variant === 'channel' && channelName && channelCreationTime && (
             <ChannelHero
