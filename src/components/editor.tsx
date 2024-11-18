@@ -92,7 +92,7 @@ export default function Editor({
                         const isEmpty =
                            !addedImage &&
                            text.replace(/<(.|\n)*?>/g, '').trim().length === 0;
-                        if (!isEmpty) return;
+                        if (isEmpty) return;
 
                         const body = JSON.stringify(quill.getContents());
                         submitRef.current({ body, image: addedImage });

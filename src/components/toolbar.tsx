@@ -1,29 +1,64 @@
-import { Button } from '@/components/ui/button';
-import { useGetWorkspace } from '@/features/workspaces/api/use-get-workspace';
-import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
-import { Info, Search } from 'lucide-react';
+import { MessagesSquareIcon, Pencil, Smile, Trash } from 'lucide-react';
+import React from 'react';
+import { Button } from './ui/button';
+import Hint from './hint';
+import EmojiPopover from './emoji-popover';
 
-export default function Toolbar() {
-   const workspaceId = useWorkspaceId();
-   const { data } = useGetWorkspace({ id: workspaceId });
+type Props = {
+   isAuthor: boolean;
+   isPending: boolean;
+   handleEdit: () => void;
+   handleDelete: () => void;
+   handleThread: () => void;
+   handleReaction: (value: string) => void;
+   hideThreadButton?: boolean;
+};
+
+export default function Toolbar({
+   isAuthor,
+   isPending,
+   handleEdit,
+   handleDelete,
+   handleThread,
+   handleReaction,
+   hideThreadButton,
+}: Props) {
    return (
-      <nav className="flex h-10 items-center justify-between bg-[#481349] p-1.5">
-         <div className="flex-1" />
-         <div className="max-[642px] min-w-[280px] shrink grow-[2]">
-            <Button
-               size="sm"
-               className="hover:bg-accent-25 h-7 w-full justify-start bg-accent/25 px-2"
+      <div className="absolute right-5 top-0">
+         <div className="boder rounded-md bg-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
+            <EmojiPopover
+               hint="Add reaction"
+               onEmojiSelect={(emoji) => handleReaction(emoji.native)}
             >
-               <Search className="mr-2 size-4 text-white" />
-               <span className="text-xs text-white">Search {data?.name}</span>
-            </Button>
-         </div>
+               <Button variant="ghost" size="iconSm" disabled={isPending}>
+                  <Smile className="size-4" />
+               </Button>
+            </EmojiPopover>
 
-         <div className="ml-auto flex flex-1 items-center justify-end">
-            <Button variant="transparent" size="iconSm">
-               <Info className="size-5 text-white" />
-            </Button>
+            {!hideThreadButton && (
+               <Hint label="Reply in thread">
+                  <Button variant="ghost" size="iconSm" disabled={isPending}>
+                     <MessagesSquareIcon className="size-4" />
+                  </Button>
+               </Hint>
+            )}
+
+            {isAuthor && (
+               <Hint label="Edit message">
+                  <Button variant="ghost" size="iconSm" disabled={isPending}>
+                     <Pencil className="size-4" />
+                  </Button>
+               </Hint>
+            )}
+
+            {isAuthor && (
+               <Hint label="Delete message">
+                  <Button variant="ghost" size="iconSm" disabled={isPending}>
+                     <Trash className="size-4" />
+                  </Button>
+               </Hint>
+            )}
          </div>
-      </nav>
+      </div>
    );
 }

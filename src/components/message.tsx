@@ -5,6 +5,7 @@ import Hint from './hint';
 import Renderer from './renderer';
 import Thumbnail from './thumbnail';
 import { Avatar } from './ui/avatar';
+import Toolbar from './toolbar';
 
 type Props = {
    id: Id<'messages'>;
@@ -120,6 +121,18 @@ export default function Message({
                ) : null}
             </div>
          </div>
+
+         {!isEditing && (
+            <Toolbar
+               isAuthor={isAuthor}
+               isPending={false}
+               handleEdit={() => setEdittingId(id)}
+               handleDelete={() => {}}
+               handleThread={() => {}}
+               handleReaction={() => {}}
+               hideThreadButton={hideThreadButton}
+            />
+         )}
       </div>
    );
 }

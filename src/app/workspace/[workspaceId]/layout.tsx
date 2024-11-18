@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/sidebar';
-import Toolbar from '@/components/toolbar';
+import Toolbar from '@/features/workspaces/components/toolbar';
 import {
    ResizableHandle,
    ResizablePanel,
