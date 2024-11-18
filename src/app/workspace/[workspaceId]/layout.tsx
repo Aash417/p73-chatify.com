@@ -1,19 +1,19 @@
 'use client';
 
 import Sidebar from '@/components/sidebar';
-import Toolbar from '@/features/workspaces/components/toolbar';
 import {
    ResizableHandle,
    ResizablePanel,
    ResizablePanelGroup,
 } from '@/components/ui/resizable';
+import Toolbar from '@/features/workspaces/components/toolbar';
 import WorkspaceSidebar from '@/features/workspaces/components/workspace-sidebar';
 
 type Props = { children: React.ReactNode };
 
 export default function Layout({ children }: Props) {
    return (
-      <div className="h-full bg-red-100">
+      <div className="h-full">
          <Toolbar />
          <div className="flex h-[calc(100vh-40px)]">
             <Sidebar />
