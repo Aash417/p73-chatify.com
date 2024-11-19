@@ -200,6 +200,7 @@ export default function Thread({ messageId, onClose }: Props) {
                            image={message.image}
                            updatedAt={message.updatedAt}
                            createdAt={message._creationTime}
+                           threadName={message.threadName}
                            threadCount={message.threadCount}
                            threadImage={message.threadImage}
                            threadTimestamp={message.threadTimestamp}

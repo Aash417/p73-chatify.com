@@ -13,6 +13,7 @@ import { format, isToday, isYesterday } from 'date-fns';
 import dynamic from 'next/dynamic';
 import { toast } from 'sonner';
 import { Doc, Id } from '../../../../convex/_generated/dataModel';
+import ThreadBar from './thread-bar';
 import Toolbar from './toolbar';
 
 const Renderer = dynamic(() => import('@/components/renderer'), { ssr: false });
@@ -38,6 +39,7 @@ type Props = {
    isCompact?: boolean;
    setEdittingId: (id: Id<'messages'> | null) => void;
    hideThreadButton?: boolean;
+   threadName?: string;
    threadCount?: number;
    threadImage?: string;
    threadTimestamp?: number;
@@ -68,6 +70,7 @@ export default function Message({
    isCompact,
    setEdittingId,
    hideThreadButton,
+   threadName,
    threadCount,
    threadImage,
    threadTimestamp,
@@ -172,6 +175,14 @@ export default function Message({
                            </span>
                         ) : null}
                         <Reactions data={reactions} onChange={handleReaction} />
+
+                        <ThreadBar
+                           count={threadCount}
+                           name={threadName}
+                           image={threadImage}
+                           timestamp={threadTimestamp}
+                           onClick={() => onOpenMessage(id)}
+                        />
                      </div>
                   )}
                </div>
@@ -246,6 +257,14 @@ export default function Message({
                         </span>
                      ) : null}
                      <Reactions data={reactions} onChange={handleReaction} />
+
+                     <ThreadBar
+                        count={threadCount}
+                        name={threadName}
+                        image={threadImage}
+                        timestamp={threadTimestamp}
+                        onClick={() => onOpenMessage(id)}
+                     />
                   </div>
                )}
             </div>

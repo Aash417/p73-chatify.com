@@ -99,6 +99,7 @@ export default function MessageList({
                         image={message.image}
                         updatedAt={message.updatedAt}
                         createdAt={message._creationTime}
+                        threadName={message.threadName}
                         threadCount={message.threadCount}
                         threadImage={message.threadImage}
                         threadTimestamp={message.threadTimestamp}

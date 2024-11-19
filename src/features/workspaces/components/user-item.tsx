@@ -31,6 +31,7 @@ type Props = {
 export default function UserItem({ id, label, image, variant }: Props) {
    const workspaceId = useWorkspaceId();
    const avatarFallback = label?.charAt(0).toUpperCase();
+
    return (
       <Button
          variant="transparent"

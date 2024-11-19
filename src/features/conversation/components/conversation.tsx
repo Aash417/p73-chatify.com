@@ -1,3 +1,5 @@
+'use state';
+
 import Loader from '@/components/loader';
 import { useGetMember } from '@/features/members/api/use-get-member';
 import { useMemberId } from '@/features/members/hooks/use-memberId';
