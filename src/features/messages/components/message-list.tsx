@@ -1,11 +1,14 @@
+'use client';
+
+import Loader from '@/components/loader';
+import ChannelHero from '@/features/channels/components/channel-hero';
+import ConversationHero from '@/features/conversation/components/conversation-hero';
 import { useCurrentMember } from '@/features/members/api/use-current-member';
 import { GetMessagesReturnType } from '@/features/messages/api/use-get-messages';
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
 import { differenceInMinutes, format, isToday, isYesterday } from 'date-fns';
 import { useState } from 'react';
-import { Id } from '../../convex/_generated/dataModel';
-import ChannelHero from './channel-hero';
-import Loader from './loader';
+import { Id } from '../../../../convex/_generated/dataModel';
 import Message from './message';
 
 const TIME_THRESHOLD = 5;
@@ -140,6 +143,10 @@ export default function MessageList({
                name={channelName}
                creationTime={channelCreationTime}
             />
+         )}
+
+         {variant === 'conversation' && (
+            <ConversationHero name={memberName} image={memberImage} />
          )}
       </div>
    );

@@ -1,6 +1,10 @@
+import Hint from '@/components/hint';
+import Thumbnail from '@/components/thumbnail';
+import { Avatar } from '@/components/ui/avatar';
 import { useRemoveMessage } from '@/features/messages/api/use-remove-message';
 import { useUpdateMessage } from '@/features/messages/api/use-update-message';
 import { useToggleReaction } from '@/features/reactions/api/use-toggle-reaction';
+import Reactions from '@/features/reactions/components/reactions';
 import useConfirm from '@/hooks/use-confirm';
 import { usePanel } from '@/hooks/use-panel';
 import { cn } from '@/lib/utils';
@@ -8,12 +12,8 @@ import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { format, isToday, isYesterday } from 'date-fns';
 import dynamic from 'next/dynamic';
 import { toast } from 'sonner';
-import { Doc, Id } from '../../convex/_generated/dataModel';
-import Hint from './hint';
-import Reactions from './reactions';
-import Thumbnail from './thumbnail';
+import { Doc, Id } from '../../../../convex/_generated/dataModel';
 import Toolbar from './toolbar';
-import { Avatar } from './ui/avatar';
 
 const Renderer = dynamic(() => import('@/components/renderer'), { ssr: false });
 const Editor = dynamic(() => import('@/components/editor'), { ssr: false });

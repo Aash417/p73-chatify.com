@@ -1,5 +1,4 @@
 import Loader from '@/components/loader';
-import Message from '@/components/message';
 import TriangleAlert from '@/components/triangle-alert';
 import { Button } from '@/components/ui/button';
 import { useChannelId } from '@/features/channels/hooks/use-channelId';
@@ -7,6 +6,7 @@ import { useCurrentMember } from '@/features/members/api/use-current-member';
 import { useCreateMessage } from '@/features/messages/api/use-create-message';
 import { useGetMessage } from '@/features/messages/api/use-get-message';
 import { useGetMessages } from '@/features/messages/api/use-get-messages';
+import Message from '@/features/messages/components/message';
 import { useGenerateUploadUrl } from '@/features/upload/api/use-generate-upload-url';
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
 import { differenceInMinutes, format, isToday, isYesterday } from 'date-fns';

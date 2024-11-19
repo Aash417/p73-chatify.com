@@ -1,13 +1,13 @@
 'use client';
 
 import Loader from '@/components/loader';
-import MessageList from '@/components/message-list';
 import TriangleAlert from '@/components/triangle-alert';
 import { useGetChannel } from '@/features/channels/api/use-get-channel';
 import ChannelHeader from '@/features/channels/components/channel-header';
 import ChatInput from '@/features/channels/components/chat-input';
 import { useChannelId } from '@/features/channels/hooks/use-channelId';
 import { useGetMessages } from '@/features/messages/api/use-get-messages';
+import MessageList from '@/features/messages/components/message-list';
 
 export default function Page() {
    const channelId = useChannelId();

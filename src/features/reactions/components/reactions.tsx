@@ -1,9 +1,9 @@
+import EmojiPopover from '@/components/emoji-popover';
 import { useCurrentMember } from '@/features/members/api/use-current-member';
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspaceId';
 import { cn } from '@/lib/utils';
 import { MdOutlineAddReaction } from 'react-icons/md';
-import { Doc, Id } from '../../convex/_generated/dataModel';
-import EmojiPopover from './emoji-popover';
+import { Doc, Id } from '../../../../convex/_generated/dataModel';
 
 type Props = {
    data: Array<
