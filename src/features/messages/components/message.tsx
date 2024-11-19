@@ -1,3 +1,5 @@
+'use client';
+
 import Hint from '@/components/hint';
 import Thumbnail from '@/components/thumbnail';
 import { Avatar } from '@/components/ui/avatar';
@@ -76,7 +78,8 @@ export default function Message({
    threadTimestamp,
 }: Props) {
    const avatarFallback = authorName.charAt(0).toUpperCase();
-   const { parentMessageId, onOpenMessage, onClose } = usePanel();
+   const { parentMessageId, onOpenMessage, onOpenProfile, onClose } =
+      usePanel();
    const [ConfirmDialog, confirm] = useConfirm(
       'Delete message',
       'Are you sure you want to delete this message',
@@ -89,7 +92,8 @@ export default function Message({
    const { mutate: toggleReaction, isPending: isTogglingReaction } =
       useToggleReaction();
 
-   const isPending = isUpdatingMessage || isRemovingMessage;
+   const isPending =
+      isUpdatingMessage || isRemovingMessage || isTogglingReaction;
 
    function handleUpdate({ body }: { body: string }) {
       updateMessage(
@@ -215,7 +219,7 @@ export default function Message({
             )}
          >
             <div className="flex items-start gap-2">
-               <button>
+               <button onClick={() => onOpenProfile(memberId)}>
                   <Avatar className="size-9">
                      <AvatarImage src={authorImage}></AvatarImage>
                      <AvatarFallback>{avatarFallback}</AvatarFallback>
@@ -236,7 +240,7 @@ export default function Message({
                   <div className="flex w-full flex-col overflow-hidden">
                      <div className="text-sm">
                         <button
-                           onClick={() => {}}
+                           onClick={() => onOpenProfile(memberId)}
                            className="font-bold text-primary hover:underline"
                         >
                            {authorName}
