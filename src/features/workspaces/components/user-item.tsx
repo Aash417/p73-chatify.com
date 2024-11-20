@@ -28,7 +28,12 @@ type Props = {
    variant?: VariantProps<typeof userItemVariants>['variant'];
 };
 
-export default function UserItem({ id, label, image, variant }: Props) {
+export default function UserItem({
+   id,
+   label,
+   image,
+   variant,
+}: Readonly<Props>) {
    const workspaceId = useWorkspaceId();
    const avatarFallback = label?.charAt(0).toUpperCase();
 

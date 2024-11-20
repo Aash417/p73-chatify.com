@@ -28,7 +28,12 @@ type Props = {
    variant?: VariantProps<typeof sidebarItemVariants>['variant'];
 };
 
-export default function SidebarItem({ id, label, icon: Icon, variant }: Props) {
+export default function SidebarItem({
+   id,
+   label,
+   icon: Icon,
+   variant,
+}: Readonly<Props>) {
    const workspaceId = useWorkspaceId();
 
    return (

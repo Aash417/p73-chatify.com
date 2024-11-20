@@ -13,7 +13,12 @@ type Props = {
    children: React.ReactNode;
 };
 
-export default function Hint({ label, side, align, children }: Props) {
+export default function Hint({
+   label,
+   side,
+   align,
+   children,
+}: Readonly<Props>) {
    return (
       <TooltipProvider>
          <Tooltip delayDuration={50}>

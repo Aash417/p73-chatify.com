@@ -1,8 +1,7 @@
+import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
-import React from 'react';
 import { IconType } from 'react-icons/lib';
 import { Button } from './ui/button';
-import { cn } from '@/lib/utils';
 
 type Props = {
    icon: LucideIcon | IconType;
@@ -10,7 +9,11 @@ type Props = {
    isActive?: boolean;
 };
 
-export default function SidebarButton({ icon: Icon, label, isActive }: Props) {
+export default function SidebarButton({
+   icon: Icon,
+   label,
+   isActive,
+}: Readonly<Props>) {
    return (
       <div className="group flex cursor-pointer flex-col items-center justify-center gap-y-0.5">
          <Button

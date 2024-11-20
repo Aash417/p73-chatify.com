@@ -14,11 +14,11 @@ type Props = { placeholder: string };
 type CreateMessageValue = {
    channelId: Id<'channels'>;
    workspaceId: Id<'workspaces'>;
-   image?: Id<'_storage'> | undefined;
+   image?: Id<'_storage'>;
    body: string;
 };
 
-export default function ChatInput({ placeholder }: Props) {
+export default function ChatInput({ placeholder }: Readonly<Props>) {
    const channelId = useChannelId();
    const workspaceId = useWorkspaceId();
    const [editorKey, setEditorKey] = useState(0);
@@ -57,7 +57,7 @@ export default function ChatInput({ placeholder }: Props) {
                headers: { 'Content-Type': image.type },
                body: image,
             });
-            if (!result.ok) throw new Error('Failed to uplaod image');
+            if (!result.ok) throw new Error('Failed to upload image');
 
             const { storageId } = await result.json();
             values.image = storageId;
@@ -66,7 +66,7 @@ export default function ChatInput({ placeholder }: Props) {
          await createMessage(values, { throwError: true });
          setEditorKey((prevKey) => prevKey + 1);
       } catch (error) {
-         toast.error('Failed to send messaage');
+         toast.error('Failed to send message');
       } finally {
          setIsPending(false);
          editorRef.current?.enable(true);

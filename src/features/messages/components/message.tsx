@@ -220,9 +220,11 @@ export default function Message({
          >
             <div className="flex items-start gap-2">
                <button onClick={() => onOpenProfile(memberId)}>
-                  <Avatar className="size-9">
+                  <Avatar className="size-7">
                      <AvatarImage src={authorImage}></AvatarImage>
-                     <AvatarFallback>{avatarFallback}</AvatarFallback>
+                     <AvatarFallback className="flex size-7 items-center justify-center rounded-md bg-sky-500 text-white">
+                        {avatarFallback}
+                     </AvatarFallback>
                   </Avatar>
                </button>
 

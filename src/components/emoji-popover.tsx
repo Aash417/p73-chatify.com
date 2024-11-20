@@ -19,7 +19,7 @@ export default function EmojiPopover({
    hint = 'emoji',
    onEmojiSelect,
    children,
-}: Props) {
+}: Readonly<Props>) {
    const [popoverOpen, setPopoverOpen] = useState(false);
    const [tooltipOpen, setTooltipOpen] = useState(false);
 

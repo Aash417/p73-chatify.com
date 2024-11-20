@@ -7,13 +7,13 @@ import {
    DropdownMenuItem,
    DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useCurrentuser } from '@/features/auth/api/use-current-user';
+import { useCurrentUser } from '@/features/auth/api/use-current-user';
 import { useAuthActions } from '@convex-dev/auth/react';
 import { Loader, LogOut } from 'lucide-react';
 
 export default function UserButton() {
    const { signOut } = useAuthActions();
-   const { data, isLoading } = useCurrentuser();
+   const { data, isLoading } = useCurrentUser();
 
    if (isLoading)
       return <Loader className="size-4 animate-spin text-muted-foreground" />;

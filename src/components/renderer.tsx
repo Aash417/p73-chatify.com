@@ -8,7 +8,7 @@ type Props = {
    value: Doc<'messages'>['body'];
 };
 
-export default function Renderer({ value }: Props) {
+export default function Renderer({ value }: Readonly<Props>) {
    const [isEmpty, setIsEmpty] = useState(false);
    const rendererRef = useRef<HTMLDivElement>(null);
 

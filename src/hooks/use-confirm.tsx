@@ -22,16 +22,16 @@ export default function useConfirm(
          setPromise({ resolve });
       });
    }
-   function handleclose() {
+   function handleClose() {
       setPromise(null);
    }
    function handleCancel() {
       promise?.resolve(false);
-      handleclose();
+      handleClose();
    }
    function handleConfirm() {
       promise?.resolve(true);
-      handleclose();
+      handleClose();
    }
 
    function ConfirmDialog() {

@@ -18,7 +18,7 @@ type Props = {
    setState: (state: SignInFlow) => void;
 };
 
-export default function SignUpCard({ setState }: Props) {
+export default function SignUpCard({ setState }: Readonly<Props>) {
    const { signIn } = useAuthActions();
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
@@ -93,7 +93,7 @@ export default function SignUpCard({ setState }: Props) {
                   disabled={pending}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Passoword"
+                  placeholder="Password"
                   type="password"
                   required
                />
@@ -125,7 +125,7 @@ export default function SignUpCard({ setState }: Props) {
                   className="relative w-full"
                >
                   <FcGoogle className="absolute left-2.5 top-3 size-5" />
-                  Contiue with Google
+                  Continue with Google
                </Button>
             </div>
 
@@ -135,7 +135,6 @@ export default function SignUpCard({ setState }: Props) {
                   onClick={() => setState('signIn')}
                   className="cursor-pointer text-sky-700 hover:underline"
                >
-                  {' '}
                   Sign in
                </span>
             </p>

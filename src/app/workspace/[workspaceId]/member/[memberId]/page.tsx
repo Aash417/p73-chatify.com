@@ -28,13 +28,15 @@ export default function Page() {
       );
    }, [memberId, workspaceId, mutate]);
 
-   if (isPending) <Loader />;
+   if (isPending) return <Loader />;
 
    if (!conversationId)
-      <TriangleAlert
-         message="Conversation not found"
-         color="text-muted-foreground"
-      />;
+      return (
+         <TriangleAlert
+            message="Conversation not found"
+            color="text-muted-foreground"
+         />
+      );
 
-   return <Conversation id={conversationId!} />;
+   return <Conversation id={conversationId} />;
 }

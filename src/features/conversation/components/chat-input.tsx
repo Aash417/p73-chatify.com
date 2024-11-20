@@ -17,11 +17,14 @@ type Props = {
 type CreateMessageValue = {
    conversationId: Id<'conversations'>;
    workspaceId: Id<'workspaces'>;
-   image?: Id<'_storage'> | undefined;
+   image?: Id<'_storage'>;
    body: string;
 };
 
-export default function ChatInput({ placeholder, conversationId }: Props) {
+export default function ChatInput({
+   placeholder,
+   conversationId,
+}: Readonly<Props>) {
    const workspaceId = useWorkspaceId();
    const [editorKey, setEditorKey] = useState(0);
    const [isPending, setIsPending] = useState(false);
@@ -59,7 +62,7 @@ export default function ChatInput({ placeholder, conversationId }: Props) {
                headers: { 'Content-Type': image.type },
                body: image,
             });
-            if (!result.ok) throw new Error('Failed to uplaod image');
+            if (!result.ok) throw new Error('Failed to upload image');
 
             const { storageId } = await result.json();
             values.image = storageId;
@@ -68,7 +71,7 @@ export default function ChatInput({ placeholder, conversationId }: Props) {
          await createMessage(values, { throwError: true });
          setEditorKey((prevKey) => prevKey + 1);
       } catch (error) {
-         toast.error('Failed to send messaage');
+         toast.error('Failed to send message');
       } finally {
          setIsPending(false);
          editorRef.current?.enable(true);

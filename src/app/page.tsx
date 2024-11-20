@@ -17,7 +17,6 @@ export default function Page() {
 
       if (workspaceId) router.replace(`/workspace/${workspaceId}`);
       else if (!open) setOpen(true);
-      else console.log('not work');
    }, [workspaceId, isLoading, open, setOpen, router]);
 
    return (

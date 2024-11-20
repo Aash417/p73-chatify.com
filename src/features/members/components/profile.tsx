@@ -1,3 +1,5 @@
+'use client';
+
 import Loader from '@/components/loader';
 import TriangleAlert from '@/components/triangle-alert';
 import { Button } from '@/components/ui/button';
@@ -159,12 +161,13 @@ export default function Profile({ memberId, onClose }: Props) {
             </div>
 
             <div className="flex flex-col items-center justify-center p-4">
-               <Avatar className="size-full max-h-[256px] max-w-[256px]">
+               <Avatar>
                   <AvatarImage
-                     className="m-auto rounded-md"
                      src={member.user.image}
-                  ></AvatarImage>
-                  <AvatarFallback className="aspect-square text-6xl">
+                     className="rounded-md"
+                     alt="user image"
+                  />
+                  <AvatarFallback className="flex h-[100px] w-[100px] items-center justify-center rounded-md bg-sky-500 text-6xl text-white">
                      {avatarFallback}
                   </AvatarFallback>
                </Avatar>

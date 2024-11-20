@@ -5,7 +5,7 @@ type Props = {
    creationTime: number;
 };
 
-export default function ChannelHero({ name, creationTime }: Props) {
+export default function ChannelHero({ name, creationTime }: Readonly<Props>) {
    return (
       <div className="mx-5 mb-4 mt-[88px]">
          <p className="mb-2 flex items-center text-2xl font-bold"># {name}</p>

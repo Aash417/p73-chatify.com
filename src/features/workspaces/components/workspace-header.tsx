@@ -18,7 +18,10 @@ type Props = {
    isAdmin: boolean;
 };
 
-export default function WorkspaceHeader({ workspace, isAdmin }: Props) {
+export default function WorkspaceHeader({
+   workspace,
+   isAdmin,
+}: Readonly<Props>) {
    const [preferencesOpen, setPreferencesOpen] = useState(false);
    const [inviteOpen, setInviteOpen] = useState(false);
 
@@ -85,7 +88,7 @@ export default function WorkspaceHeader({ workspace, isAdmin }: Props) {
                            className="cursor-pointer py-2"
                            onClick={() => setPreferencesOpen(true)}
                         >
-                           Prefrences
+                           Preferences
                         </DropdownMenuItem>
                      </>
                   )}

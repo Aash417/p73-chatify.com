@@ -29,11 +29,11 @@ export default function PreferencesModal({
    open,
    setOpen,
    initialValue,
-}: Props) {
+}: Readonly<Props>) {
    const workspaceId = useWorkspaceId();
    const [ConfirmDialog, confirm] = useConfirm(
       'Are you sure',
-      'This action is irresevable',
+      'This action is can not be undone',
    );
 
    const [value, setValue] = useState(initialValue);
@@ -41,7 +41,7 @@ export default function PreferencesModal({
 
    const { mutate: updateWorkspace, isPending: isUpdatingWorkspace } =
       useUpdateWorkspace();
-   const { mutate: removeWorkspace, isPending: isRemoveingWorkspace } =
+   const { mutate: removeWorkspace, isPending: isRemovingWorkspace } =
       useRemoveWorkspace();
 
    function handleEdit(e: React.FormEvent<HTMLFormElement>) {
@@ -143,7 +143,7 @@ export default function PreferencesModal({
                   </Dialog>
 
                   <button
-                     disabled={isRemoveingWorkspace}
+                     disabled={isRemovingWorkspace}
                      onClick={handleRemove}
                      className="flex cursor-pointer items-center gap-x-2 rounded-lg border bg-white px-5 py-4 text-rose-600 hover:bg-gray-50"
                   >

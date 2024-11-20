@@ -20,7 +20,12 @@ type Props = {
    joinCode: string;
 };
 
-export default function InviteModal({ open, setOpen, name, joinCode }: Props) {
+export default function InviteModal({
+   open,
+   setOpen,
+   name,
+   joinCode,
+}: Readonly<Props>) {
    const workspaceId = useWorkspaceId();
    const { mutate, isPending } = useNewJoinCode();
    const [ConfirmDialog, confirm] = useConfirm(
@@ -49,7 +54,7 @@ export default function InviteModal({ open, setOpen, name, joinCode }: Props) {
                toast.success('Invite code regenerated');
             },
             onError: () => {
-               toast.error('Faild to regenerated invite code');
+               toast.error('Failed to regenerated invite code');
             },
          },
       );
@@ -61,7 +66,7 @@ export default function InviteModal({ open, setOpen, name, joinCode }: Props) {
          <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent>
                <DialogHeader>
-                  <DialogTitle>Invite poeple to {name}</DialogTitle>
+                  <DialogTitle>Invite people to {name}</DialogTitle>
                   <DialogDescription>
                      Use the code below to invite people to your workspace
                   </DialogDescription>

@@ -17,7 +17,7 @@ export default function WorkspaceSection({
    hint,
    onNew,
    children,
-}: Props) {
+}: Readonly<Props>) {
    const [on, toggle] = useToggle(true);
 
    return (

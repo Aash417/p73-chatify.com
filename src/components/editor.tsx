@@ -41,7 +41,7 @@ export default function Editor({
    defaultValue = [],
    disabled = false,
    innerRef,
-}: Props) {
+}: Readonly<Props>) {
    const [text, setText] = useState('');
    const [image, setImage] = useState<File | null>(null);
    const [isToolbarVisible, setIsToolbarVisible] = useState(false);

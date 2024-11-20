@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 
 type Props = { url: string | null | undefined };
 
-export default function Thumbnail({ url }: Props) {
+export default function Thumbnail({ url }: Readonly<Props>) {
    if (!url) return null;
 
    return (

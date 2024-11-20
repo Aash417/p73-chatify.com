@@ -25,7 +25,7 @@ import { toast } from 'sonner';
 
 type Props = { title: string };
 
-export default function ChannelHeader({ title }: Props) {
+export default function ChannelHeader({ title }: Readonly<Props>) {
    const router = useRouter();
    const channelId = useChannelId();
    const workspaceId = useWorkspaceId();
@@ -39,9 +39,9 @@ export default function ChannelHeader({ title }: Props) {
    const { data: member } = useCurrentMember({ workspaceId });
    const { mutate: updateChannel, isPending: updatingChannel } =
       useUpdateChannel();
-   const { mutate: removeChannel, isPending: RemoveingChannel } =
+   const { mutate: removeChannel, isPending: RemovingChannel } =
       useRemoveChannel();
-   const isPending = updatingChannel || RemoveingChannel;
+   const isPending = updatingChannel || RemovingChannel;
 
    function handleEditOpen() {
       if (member?.role !== 'admin') return;
@@ -104,7 +104,7 @@ export default function ChannelHeader({ title }: Props) {
             </DialogTrigger>
 
             <DialogContent className="overflow-hidden bg-gray-50 p-0">
-               <DialogHeader className="boder-b bg-white p-4">
+               <DialogHeader className="border-b bg-white p-4">
                   <DialogTitle> # {title}</DialogTitle>
                </DialogHeader>
 

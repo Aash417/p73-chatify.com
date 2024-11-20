@@ -37,17 +37,18 @@ export function useCreateChannel() {
             const response = await mutation(values);
             options?.onSuccess?.(response);
 
+            setData(response);
             return response;
-         } catch (error) {
+         } catch (err) {
             setStatus('error');
-            options?.onError?.(error as Error);
+            options?.onError?.(err as Error);
             if (options?.throwError) throw error;
          } finally {
             setStatus('settled');
             options?.onSettled?.();
          }
       },
-      [mutation],
+      [error, mutation],
    );
 
    return { mutate, isPending, isSuccess, isError, isSettled, data };

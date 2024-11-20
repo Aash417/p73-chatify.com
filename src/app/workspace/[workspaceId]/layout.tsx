@@ -16,7 +16,7 @@ import { Id } from '../../../../convex/_generated/dataModel';
 
 type Props = { children: React.ReactNode };
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: Readonly<Props>) {
    const { parentMessageId, profileMemberId, onClose } = usePanel();
 
    const showPanel = !!parentMessageId || !!profileMemberId;

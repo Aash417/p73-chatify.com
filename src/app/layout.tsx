@@ -11,7 +11,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-   title: 'Thatcord',
+   title: 'chatify.com',
    description: 'Group chat with friends',
 };
 
