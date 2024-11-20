@@ -1,6 +1,6 @@
 'use client';
 
-import UserButton from '@/features/auth/components/user-button';
+import Loader from '@/components/loader';
 import { useGetWorkspaces } from '@/features/workspaces/api/use-get-workspaces';
 import { useCreateWorkspaceModal } from '@/features/workspaces/store/use-create-workspace-modal';
 import { useRouter } from 'next/navigation';
@@ -19,9 +19,5 @@ export default function Page() {
       else if (!open) setOpen(true);
    }, [workspaceId, isLoading, open, setOpen, router]);
 
-   return (
-      <div>
-         <UserButton />
-      </div>
-   );
+   return <Loader />;
 }
