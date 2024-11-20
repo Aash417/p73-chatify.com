@@ -1,10 +1,11 @@
-'use state';
+'use client';
 
 import Loader from '@/components/loader';
 import { useGetMember } from '@/features/members/api/use-get-member';
 import { useMemberId } from '@/features/members/hooks/use-memberId';
 import { useGetMessages } from '@/features/messages/api/use-get-messages';
 import MessageList from '@/features/messages/components/message-list';
+import { usePanel } from '@/hooks/use-panel';
 import { Id } from '../../../../convex/_generated/dataModel';
 import ChatInput from './chat-input';
 import ConversationHeader from './conversation-header';
@@ -15,6 +16,7 @@ type Props = {
 
 export default function Conversation({ id }: Props) {
    const memberId = useMemberId();
+   const { onOpenProfile } = usePanel();
    const { data: member, isLoading: isLoadingMember } = useGetMember({
       id: memberId,
    });
@@ -30,7 +32,7 @@ export default function Conversation({ id }: Props) {
          <ConversationHeader
             memberName={member?.user.name}
             memberImage={member?.user.image}
-            onClick={() => {}}
+            onClick={() => onOpenProfile(memberId)}
          />
 
          <MessageList

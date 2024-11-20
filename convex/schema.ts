@@ -45,7 +45,7 @@ const schema = defineSchema({
       workspaceId: v.id('workspaces'),
       memberOneId: v.id('members'),
       memberTwoId: v.id('members'),
-   }),
+   }).index('by_workspace_id', ['workspaceId']),
    reactions: defineTable({
       workspaceId: v.id('workspaces'),
       memberId: v.id('members'),

@@ -173,7 +173,7 @@ export default function Profile({ memberId, onClose }: Props) {
             <div className="flex flex-col p-4">
                <p className="text-xl font-bold">{member.user.name}</p>
                {currentMember?.role === 'admin' &&
-                  currentMember?._id !== memberId ? (
+               currentMember?._id !== memberId ? (
                   <div className="flex gap-2">
                      <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -214,7 +214,7 @@ export default function Profile({ memberId, onClose }: Props) {
                      </Button>
                   </div>
                ) : currentMember?._id === memberId &&
-                  currentMember.role !== 'admin' ? (
+                 currentMember.role !== 'admin' ? (
                   <div className="mt-4">
                      <Button
                         onClick={onLeave}

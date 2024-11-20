@@ -39,7 +39,9 @@ export default function Layout({ children }: Props) {
                   <WorkspaceSidebar />
                </ResizablePanel>
                <ResizableHandle withHandle />
-               <ResizablePanel minSize={30}>{children}</ResizablePanel>
+               <ResizablePanel minSize={30} defaultSize={80}>
+                  {children}
+               </ResizablePanel>
 
                {showPanel && (
                   <>
